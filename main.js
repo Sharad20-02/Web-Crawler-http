@@ -1,6 +1,7 @@
 const {crawlPage} = require('./crawl.js');
+const {sortPages, printReport} = require('./report.js');
 
-function main(){
+async function main(){
     if(process.argv.length<3){
         console.log("No Website Provided");
         process.exit(1);
@@ -13,7 +14,9 @@ function main(){
 
     const baseURL = process.argv[2];
     console.log(`Starting crawl of: ${baseURL}`);
-    crawlPage(baseURL);
+    const pages = await crawlPage(baseURL, baseURL, {});
+
+    printReport(pages);
 }
 
 main()
